@@ -37,5 +37,6 @@ class ViewerButton: UIControl {
         if #available(iOS 13.0, *) {
             layer.cornerCurve = .continuous
         }
+        detailsLabel.text = nil
     }
 }

@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CategoriesViewController" customModule="AUNV">
             <connections>
+                <outlet property="collectionView" destination="1Vp-MA-JSz" id="ICB-gd-2Xm"/>
+                <outlet property="titleLabel" destination="ZJ2-50-4S3" id="wiL-M2-3PE"/>
                 <outlet property="view" destination="iN0-l3-epB" id="iLk-hU-5Jy"/>
             </connections>
         </placeholder>
@@ -17,9 +19,94 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1Vp-MA-JSz">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vJb-f2-Z7M">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="UXK-TC-RK8"/>
+                        <outlet property="delegate" destination="-1" id="aHu-ed-BtX"/>
+                    </connections>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ2-50-4S3" userLabel="Title Label">
+                    <rect key="frame" x="25" y="132" width="364" height="38.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="32"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0m-i2-Ed9" userLabel="Add Button" customClass="NavigationButton" customModule="AUNV">
+                    <rect key="frame" x="350" y="798" width="54" height="54"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="action-add" translatesAutoresizingMaskIntoConstraints="NO" id="QXZ-Jo-KKl" userLabel="Image View">
+                            <rect key="frame" x="15" y="15" width="24" height="24"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.027450980392156862" green="0.15686274509803921" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="QXZ-Jo-KKl" firstAttribute="centerY" secondItem="k0m-i2-Ed9" secondAttribute="centerY" id="0d4-jr-Ngx"/>
+                        <constraint firstItem="QXZ-Jo-KKl" firstAttribute="centerX" secondItem="k0m-i2-Ed9" secondAttribute="centerX" id="9PC-Ce-xQk"/>
+                        <constraint firstAttribute="height" constant="54" id="TqD-Gn-mGZ"/>
+                        <constraint firstAttribute="width" constant="54" id="yrK-Tp-BA2"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="addTouchUpInside:" destination="-1" eventType="touchUpInside" id="te0-gY-FZX"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g96-aX-swX" userLabel="Back Button" customClass="NavigationButton" customModule="AUNV">
+                    <rect key="frame" x="25" y="54" width="48" height="48"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-back" translatesAutoresizingMaskIntoConstraints="NO" id="JE1-Bd-1R4" userLabel="Image View">
+                            <rect key="frame" x="16" y="16" width="16" height="16"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="JE1-Bd-1R4" firstAttribute="centerY" secondItem="g96-aX-swX" secondAttribute="centerY" id="AbB-kT-xUv"/>
+                        <constraint firstItem="JE1-Bd-1R4" firstAttribute="centerX" secondItem="g96-aX-swX" secondAttribute="centerX" id="cuo-NO-nae"/>
+                        <constraint firstAttribute="height" constant="48" id="q0f-Cq-4jm"/>
+                        <constraint firstAttribute="width" constant="48" id="ual-cb-aIy"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="backTouchUpInside:" destination="-1" eventType="touchUpInside" id="WlZ-vr-RDi"/>
+                    </connections>
+                </view>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94901960784313721" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="139" y="121"/>
+            <constraints>
+                <constraint firstItem="g96-aX-swX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="951-cR-HJb"/>
+                <constraint firstAttribute="bottom" secondItem="1Vp-MA-JSz" secondAttribute="bottom" id="AbN-nh-YaI"/>
+                <constraint firstItem="g96-aX-swX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="BRJ-OS-sgP"/>
+                <constraint firstItem="1Vp-MA-JSz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="KRV-S0-b1x"/>
+                <constraint firstItem="1Vp-MA-JSz" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PvG-dg-IRY"/>
+                <constraint firstItem="ZJ2-50-4S3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="SMs-UT-GRU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="k0m-i2-Ed9" secondAttribute="trailing" constant="10" id="U9f-v7-7E7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZJ2-50-4S3" secondAttribute="trailing" constant="25" id="kxc-JE-d5U"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="k0m-i2-Ed9" secondAttribute="bottom" constant="10" id="lI6-7S-IKz"/>
+                <constraint firstAttribute="trailing" secondItem="1Vp-MA-JSz" secondAttribute="trailing" id="tyR-aM-gqu"/>
+                <constraint firstItem="ZJ2-50-4S3" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="88" id="wzl-S3-YK4"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="action-add" width="24" height="24"/>
+        <image name="nav-back" width="16" height="16"/>
+    </resources>
 </document>

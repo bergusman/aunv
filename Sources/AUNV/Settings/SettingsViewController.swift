@@ -8,9 +8,12 @@
 import UIKit
 import UserNotifications
 
-public class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
+    
+    var settings: UNNotificationSettings?
+    var authorizeHandler: (() -> Void)?
     
     private func setupScrollView() {
         scrollView.contentInset.bottom = 25 + 56
@@ -21,8 +24,6 @@ public class SettingsViewController: UIViewController {
         }
     }
     
-    private var settings: UNNotificationSettings!
-    
     private func getSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
@@ -32,7 +33,15 @@ public class SettingsViewController: UIViewController {
         }
     }
     
+    private func tryFill() {
+        if let settings = settings {
+            fill(by: settings)
+        }
+    }
+    
     private func fill(by settings: UNNotificationSettings) {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
         func add(title: String, value: String) {
             let fieldView = SettingView.fromNib()
             fieldView.titleLabel.text = title
@@ -98,10 +107,12 @@ public class SettingsViewController: UIViewController {
     @IBAction func authorizeTouchUpInside(_ sender: Any) {
         let authorizeVC = AuthorizeViewController()
         authorizeVC.settings = settings
-        authorizeVC.requestedHandler = { [weak self] in
+        authorizeVC.authorizeHandler = { [weak self] in
             guard let self = self else { return }
             self.getSettings()
+            self.authorizeHandler?()
         }
+        authorizeVC.modalPresentationStyle = .fullScreen
         present(authorizeVC, animated: true)
     }
     
@@ -115,13 +126,18 @@ public class SettingsViewController: UIViewController {
     
     // MARK: - UIViewController
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
+        tryFill()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         getSettings()
     }
     
-    public init() {
+    init() {
         super.init(nibName: "SettingsViewController", bundle: Bundle.module)
     }
     

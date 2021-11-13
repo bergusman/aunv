@@ -8,13 +8,13 @@
 import UIKit
 import UserNotifications
 
-public class AuthorizeViewController: UIViewController {
+class AuthorizeViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var optionsView: AuthorizationOptionsView!
     @IBOutlet weak var toastView: ToastView!
     
     var settings: UNNotificationSettings?
-    var requestedHandler: (() -> Void)?
+    var authorizeHandler: (() -> Void)?
     
     private func setupScrollView() {
         scrollView.contentInset.bottom = 25 + 56
@@ -34,7 +34,7 @@ public class AuthorizeViewController: UIViewController {
     @IBAction func authorizeTouchUpInside(_ sender: Any) {
         UNUserNotificationCenter.current().requestAuthorization(options: optionsView.options) { granted, error in
             DispatchQueue.main.async {
-                self.requestedHandler?()
+                self.authorizeHandler?()
                 if granted {
                     self.toastView.showSuccess("Authorization Granted")
                 } else {
@@ -48,9 +48,15 @@ public class AuthorizeViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation
+    
+    @IBAction func dismissTouchUpInside(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     // MARK: - UIViewController
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         setupScrollView()
         fill()
@@ -58,7 +64,7 @@ public class AuthorizeViewController: UIViewController {
     
     // MARK: - UIViewController
     
-    public init() {
+    init() {
         super.init(nibName: "AuthorizeViewController", bundle: Bundle.module)
     }
     

@@ -26,16 +26,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d76-4B-kCW" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="746.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="804.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Request Authorization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQA-re-bah" userLabel="Title Label">
-                                    <rect key="frame" x="25" y="30" width="364" height="38.5"/>
+                                    <rect key="frame" x="25" y="88" width="364" height="38.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="32"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qeM-kz-gkO" userLabel="Options View" customClass="AuthorizationOptionsView" customModule="AUNV">
-                                    <rect key="frame" x="10" y="118.5" width="394" height="578"/>
+                                    <rect key="frame" x="10" y="176.5" width="394" height="578"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Tn-yq-SEd" userLabel="Title Label">
                                             <rect key="frame" x="20" y="20" width="354" height="24"/>
@@ -314,7 +314,7 @@
                                 <constraint firstItem="qeM-kz-gkO" firstAttribute="leading" secondItem="Gkk-lO-iIW" secondAttribute="leading" constant="10" id="ZIZ-to-N2a"/>
                                 <constraint firstItem="jQA-re-bah" firstAttribute="leading" secondItem="Gkk-lO-iIW" secondAttribute="leading" constant="25" id="ect-tQ-qUP"/>
                                 <constraint firstItem="Gkk-lO-iIW" firstAttribute="trailing" secondItem="qeM-kz-gkO" secondAttribute="trailing" constant="10" id="iEo-Ri-hPr"/>
-                                <constraint firstItem="jQA-re-bah" firstAttribute="top" secondItem="d76-4B-kCW" secondAttribute="top" constant="30" id="iUd-fS-uSZ"/>
+                                <constraint firstItem="jQA-re-bah" firstAttribute="top" secondItem="d76-4B-kCW" secondAttribute="top" constant="88" id="iUd-fS-uSZ"/>
                                 <constraint firstAttribute="bottom" secondItem="qeM-kz-gkO" secondAttribute="bottom" constant="50" id="trc-4z-Zrm"/>
                             </constraints>
                         </view>
@@ -385,6 +385,29 @@
                         <constraint firstItem="SLl-zN-bac" firstAttribute="trailing" secondItem="hxS-96-ZUM" secondAttribute="trailing" constant="25" id="vO3-gv-DS2"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUj-iZ-t0c" userLabel="Dismiss Button" customClass="NavigationButton" customModule="AUNV">
+                    <rect key="frame" x="25" y="54" width="48" height="48"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-dismiss" translatesAutoresizingMaskIntoConstraints="NO" id="8hj-Se-2jT" userLabel="Image View">
+                            <rect key="frame" x="12" y="12" width="24" height="24"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="8hj-Se-2jT" firstAttribute="centerY" secondItem="HUj-iZ-t0c" secondAttribute="centerY" id="4r3-sT-yCI"/>
+                        <constraint firstAttribute="height" constant="48" id="WB1-om-hZg"/>
+                        <constraint firstAttribute="width" constant="48" id="Wre-if-MPD"/>
+                        <constraint firstItem="8hj-Se-2jT" firstAttribute="centerX" secondItem="HUj-iZ-t0c" secondAttribute="centerX" id="vT7-S6-c1B"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="dismissTouchUpInside:" destination="-1" eventType="touchUpInside" id="hDe-zq-g30"/>
+                    </connections>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94901960784313721" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -394,17 +417,20 @@
                 <constraint firstItem="d76-4B-kCW" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="7ra-eB-foi"/>
                 <constraint firstAttribute="trailing" secondItem="14u-j7-p18" secondAttribute="trailing" id="Fk7-te-O5K"/>
                 <constraint firstItem="14u-j7-p18" firstAttribute="top" secondItem="n12-yq-lCb" secondAttribute="bottom" constant="10" id="P6W-AP-esr"/>
+                <constraint firstItem="HUj-iZ-t0c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="S31-In-vKV"/>
                 <constraint firstAttribute="bottom" secondItem="uCp-zp-vaS" secondAttribute="bottom" id="Xdu-Xj-yuH"/>
                 <constraint firstItem="uCp-zp-vaS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dZe-bo-dZL"/>
                 <constraint firstItem="n12-yq-lCb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="dwi-CW-01A"/>
                 <constraint firstAttribute="trailing" secondItem="uCp-zp-vaS" secondAttribute="trailing" id="fXF-Eh-f9R"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="n12-yq-lCb" secondAttribute="trailing" constant="10" id="lSw-d9-oj2"/>
                 <constraint firstItem="uCp-zp-vaS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nQo-ee-8vo"/>
+                <constraint firstItem="HUj-iZ-t0c" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="qb8-Iq-IPF"/>
             </constraints>
             <point key="canvasLocation" x="140.57971014492756" y="120.53571428571428"/>
         </view>
     </objects>
     <resources>
+        <image name="nav-dismiss" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

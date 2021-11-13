@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PendingsViewController" customModule="AUNV">
             <connections>
+                <outlet property="collectionView" destination="LZ4-Z2-zbF" id="CyJ-Jv-UTp"/>
+                <outlet property="titleLabel" destination="zVa-pM-CXb" id="ZVu-HR-4r2"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Sla-0u-8KK"/>
             </connections>
         </placeholder>
@@ -17,9 +19,94 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LZ4-Z2-zbF">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cdH-HF-Q9O">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="inH-Qa-6Ib"/>
+                        <outlet property="delegate" destination="-1" id="Idd-8c-n5Y"/>
+                    </connections>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pending Notifications" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVa-pM-CXb" userLabel="Title Label">
+                    <rect key="frame" x="25" y="132" width="364" height="38.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="32"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ysf-8t-ap8" userLabel="Add Button" customClass="NavigationButton" customModule="AUNV">
+                    <rect key="frame" x="350" y="798" width="54" height="54"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="action-add" translatesAutoresizingMaskIntoConstraints="NO" id="MeN-cj-6cR" userLabel="Image View">
+                            <rect key="frame" x="15" y="15" width="24" height="24"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.027450980390000001" green="0.15686274510000001" blue="0.93725490199999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="dI5-kC-YqD"/>
+                        <constraint firstItem="MeN-cj-6cR" firstAttribute="centerY" secondItem="Ysf-8t-ap8" secondAttribute="centerY" id="eXr-r7-04i"/>
+                        <constraint firstItem="MeN-cj-6cR" firstAttribute="centerX" secondItem="Ysf-8t-ap8" secondAttribute="centerX" id="pxu-j8-LMt"/>
+                        <constraint firstAttribute="height" constant="54" id="yzQ-YW-xUo"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="27"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="addTouchUpInside:" destination="-1" eventType="touchUpInside" id="VPs-vk-Hkt"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jc9-a2-yzJ" userLabel="Back Button" customClass="NavigationButton" customModule="AUNV">
+                    <rect key="frame" x="25" y="54" width="48" height="48"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav-back" translatesAutoresizingMaskIntoConstraints="NO" id="bUr-ja-NPQ" userLabel="Image View">
+                            <rect key="frame" x="16" y="16" width="16" height="16"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="PLh-Px-s4n"/>
+                        <constraint firstItem="bUr-ja-NPQ" firstAttribute="centerY" secondItem="Jc9-a2-yzJ" secondAttribute="centerY" id="PRf-kY-Shi"/>
+                        <constraint firstAttribute="width" constant="48" id="nMW-Hp-S93"/>
+                        <constraint firstItem="bUr-ja-NPQ" firstAttribute="centerX" secondItem="Jc9-a2-yzJ" secondAttribute="centerX" id="thq-hN-ZCH"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="backTouchUpInside:" destination="-1" eventType="touchUpInside" id="Xr4-2j-3Pk"/>
+                    </connections>
+                </view>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94901960784313721" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="139" y="121"/>
+            <constraints>
+                <constraint firstItem="zVa-pM-CXb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="88" id="8In-vJ-4Nf"/>
+                <constraint firstItem="zVa-pM-CXb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="E5Q-Nl-rXX"/>
+                <constraint firstAttribute="trailing" secondItem="LZ4-Z2-zbF" secondAttribute="trailing" id="GYW-bd-tcH"/>
+                <constraint firstItem="LZ4-Z2-zbF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KnN-ZD-6Vb"/>
+                <constraint firstItem="Jc9-a2-yzJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="Wm7-E4-VkG"/>
+                <constraint firstAttribute="bottom" secondItem="LZ4-Z2-zbF" secondAttribute="bottom" id="YYG-fT-jJS"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zVa-pM-CXb" secondAttribute="trailing" constant="25" id="cf4-ZA-hOv"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Ysf-8t-ap8" secondAttribute="bottom" constant="10" id="dKh-XA-DOU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ysf-8t-ap8" secondAttribute="trailing" constant="10" id="dbt-Ha-Gq6"/>
+                <constraint firstItem="Jc9-a2-yzJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="hVU-J6-tL2"/>
+                <constraint firstItem="LZ4-Z2-zbF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qSa-UE-v1y"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="action-add" width="24" height="24"/>
+        <image name="nav-back" width="16" height="16"/>
+    </resources>
 </document>

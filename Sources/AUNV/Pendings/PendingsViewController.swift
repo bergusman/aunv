@@ -21,6 +21,13 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    private func removePending(at indexPath: IndexPath) {
+        let pending = pendings[indexPath.item]
+        pendings.remove(at: indexPath.item)
+        collectionView.deleteItems(at: [indexPath])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [pending.identifier])
+    }
+    
     // MARK: - UICollectionView
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -50,6 +57,12 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        let alertVC = UIAlertController(title: "Actions", message: nil, preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Remove", style: .destructive, handler: { _ in
+            self.removePending(at: indexPath)
+        }))
+        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+        present(alertVC, animated: true)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -59,7 +72,7 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
         if #available(iOS 11.0, *) {
              w -= view.safeAreaInsets.left + view.safeAreaInsets.right
         }
-        return .init(width: w, height: 200)
+        return .init(width: w, height: 400)
     }
     
     // MARK: - UIScrollViewDelegate

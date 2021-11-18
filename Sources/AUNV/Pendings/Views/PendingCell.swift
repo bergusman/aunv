@@ -8,11 +8,28 @@
 import UIKit
 import UserNotifications
 
-class PendingCell: UICollectionViewCell {
+class PendingCell: HighlightingScaledCell {
+    @IBOutlet weak var bannerView: BannerView!
+    @IBOutlet weak var triggerView: TriggerView!
     @IBOutlet weak var identifierLabel: UILabel!
     
     func fill(by pending: UNNotificationRequest) {
         identifierLabel.text = pending.identifier
+        
+        let content = pending.content
+        if !(content.title.isEmpty && content.subtitle.isEmpty && content.body.isEmpty) {
+            bannerView.fill(by: content)
+            bannerView.isHidden = false
+        } else {
+            bannerView.isHidden = true
+        }
+        
+        if let trigger = pending.trigger {
+            triggerView.fill(by: trigger)
+            triggerView.isHidden = false
+        } else {
+            triggerView.isHidden = true
+        }
     }
     
     // MARK: - UIView

@@ -7,6 +7,7 @@
 
 import UIKit
 import UserNotifications
+import CoreLocation
 
 class NewPendingViewController: UIViewController {
     var addHandler: (() -> Void)?
@@ -15,12 +16,20 @@ class NewPendingViewController: UIViewController {
     
     @IBAction func addTouchUpInside(_ sender: Any) {
         let content = UNMutableNotificationContent()
-        content.title = "Title"
+        content.title = "iTech"
         content.subtitle = "Subtitle"
         content.body = "Body"
     
-        let date = Date(timeIntervalSinceNow: 6)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date), repeats: false)
+        //let date = Date(timeIntervalSinceNow: 600)
+        //let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date), repeats: true)
+        
+        let region = CLCircularRegion(center: .init(latitude: -8.688806, longitude: 115.171251), radius: 200, identifier: "iTech")
+        region.notifyOnExit = true
+        region.notifyOnEntry = true
+        
+        let trigger = UNLocationNotificationTrigger(region: region, repeats: true)
+        
+        //let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 600, repeats: true)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in

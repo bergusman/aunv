@@ -20,12 +20,19 @@ class DeliveredsViewController: UIViewController, UICollectionViewDataSource, UI
         }
     }
     
+    private func removeDelivered(at indexPath: IndexPath) {
+        let delivered = delivereds[indexPath.item]
+        delivereds.remove(at: indexPath.item)
+        collectionView.deleteItems(at: [indexPath])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [delivered.request.identifier])
+    }
+    
     // MARK: - UICollectionView
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     private func setupCollectionView() {
-        collectionView.register(DeliveredCell.nib, forCellWithReuseIdentifier: "delivered")
+        collectionView.register(NotificationCell.nib, forCellWithReuseIdentifier: "notification")
         collectionView.contentInset.bottom = 50
     }
     
@@ -39,7 +46,7 @@ class DeliveredsViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "delivered", for: indexPath) as! DeliveredCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "notification", for: indexPath) as! NotificationCell
         cell.fill(by: delivereds[indexPath.item])
         return cell
     }
@@ -48,6 +55,12 @@ class DeliveredsViewController: UIViewController, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        let alertVC = UIAlertController(title: "Actions", message: nil, preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Remove", style: .destructive, handler: { _ in
+            self.removeDelivered(at: indexPath)
+        }))
+        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+        present(alertVC, animated: true)
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
@@ -57,7 +70,7 @@ class DeliveredsViewController: UIViewController, UICollectionViewDataSource, UI
         if #available(iOS 11.0, *) {
              w -= view.safeAreaInsets.left + view.safeAreaInsets.right
         }
-        return .init(width: w, height: 200)
+        return NotificationCell.size(for: delivereds[indexPath.item], width: w)
     }
     
     // MARK: - UIScrollViewDelegate
@@ -76,6 +89,15 @@ class DeliveredsViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBAction func backTouchUpInside(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func removeTouchUpInside(_ sender: Any) {
+        let alertVC = UIAlertController(title: "Remove all delivered notifications?", message: nil, preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Remove All", style: .destructive, handler: { _ in
+            UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+        }))
+        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+        present(alertVC, animated: true)
     }
     
     // MARK: - UIViewController

@@ -63,6 +63,38 @@ class TriggerView: UIView {
         }
     }
     
+    class func height(for trigger: UNNotificationTrigger, width: CGFloat) -> CGFloat {
+        let w = width - 30
+        var h: CGFloat = 0
+        
+        h += NSAttributedString(string: "Trigger", attributes: [
+            .font: UIFont.systemFont(ofSize: 14, weight: .semibold)
+        ]).boundingRect(with: .init(width: w, height: 1000), options: .usesLineFragmentOrigin, context: nil).height
+        h += 3
+
+        switch trigger {
+        case let trigger as UNCalendarNotificationTrigger:
+            h += details(for: trigger).boundingRect(with: .init(width: w, height: 1000), options: .usesLineFragmentOrigin, context: nil).height
+            
+        case let trigger as UNTimeIntervalNotificationTrigger:
+            h += details(for: trigger).boundingRect(with: .init(width: w, height: 1000), options: .usesLineFragmentOrigin, context: nil).height
+            
+        case let trigger as UNLocationNotificationTrigger:
+            h += details(for: trigger).boundingRect(with: .init(width: w, height: 1000), options: .usesLineFragmentOrigin, context: nil).height
+            if trigger.region is CLCircularRegion {
+                h += 3 + 167
+            }
+            
+        case is UNPushNotificationTrigger:
+            h -= 3
+            
+        default:
+            h += attributedDetails(for: [("repeats", "\(trigger.repeats)")], separator: "").boundingRect(with: .init(width: w, height: 1000), options: .usesLineFragmentOrigin, context: nil).height
+        }
+        
+        return 10 + h + 10
+    }
+    
     private static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("YYYY MMM d HH:mm:ss")

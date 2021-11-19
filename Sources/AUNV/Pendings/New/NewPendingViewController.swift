@@ -19,6 +19,23 @@ class NewPendingViewController: UIViewController {
         content.title = "iTech"
         content.subtitle = "Subtitle"
         content.body = "Body"
+        content.sound = .default
+        if #available(iOS 13.0, *) {
+            content.targetContentIdentifier = "target"
+        }
+        content.categoryIdentifier = "MyCategory"
+        content.userInfo = [
+            "bingo": "bongo",
+            "lol": 8,
+            "kek": [
+                "shmek": "huyek",
+                "abra": "kadabra"
+            ],
+            "array": [
+                ["abra": "kadabra"],
+                "bingo"
+            ]
+        ]
     
         //let date = Date(timeIntervalSinceNow: 600)
         //let trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date), repeats: true)

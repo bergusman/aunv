@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -86,6 +86,32 @@
                         <action selector="backTouchUpInside:" destination="-1" eventType="touchUpInside" id="Xr4-2j-3Pk"/>
                     </connections>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2VA-Ob-pzc" userLabel="Remove Button" customClass="NavigationButton" customModule="AUNV">
+                    <rect key="frame" x="258" y="54" width="131" height="48"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ltw-8v-WvB">
+                            <rect key="frame" x="24" y="14" width="83" height="20"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.38431372549019605" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="ltw-8v-WvB" firstAttribute="leading" secondItem="2VA-Ob-pzc" secondAttribute="leading" constant="24" id="077-Xh-KbF"/>
+                        <constraint firstAttribute="height" constant="48" id="bsx-CS-daZ"/>
+                        <constraint firstItem="ltw-8v-WvB" firstAttribute="centerY" secondItem="2VA-Ob-pzc" secondAttribute="centerY" id="lEz-V9-hv8"/>
+                        <constraint firstAttribute="trailing" secondItem="ltw-8v-WvB" secondAttribute="trailing" constant="24" id="lzG-Oc-2b3"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="24"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="removeTouchUpInside:" destination="-1" eventType="touchUpInside" id="XqR-AI-OZ1"/>
+                    </connections>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="0.94117647058823528" green="0.94901960784313721" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -93,6 +119,7 @@
                 <constraint firstItem="zVa-pM-CXb" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="88" id="8In-vJ-4Nf"/>
                 <constraint firstItem="zVa-pM-CXb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="E5Q-Nl-rXX"/>
                 <constraint firstAttribute="trailing" secondItem="LZ4-Z2-zbF" secondAttribute="trailing" id="GYW-bd-tcH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2VA-Ob-pzc" secondAttribute="trailing" constant="25" id="KUZ-d6-Nqi"/>
                 <constraint firstItem="LZ4-Z2-zbF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KnN-ZD-6Vb"/>
                 <constraint firstItem="Jc9-a2-yzJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="Wm7-E4-VkG"/>
                 <constraint firstAttribute="bottom" secondItem="LZ4-Z2-zbF" secondAttribute="bottom" id="YYG-fT-jJS"/>
@@ -101,6 +128,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Ysf-8t-ap8" secondAttribute="trailing" constant="10" id="dbt-Ha-Gq6"/>
                 <constraint firstItem="Jc9-a2-yzJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="hVU-J6-tL2"/>
                 <constraint firstItem="LZ4-Z2-zbF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qSa-UE-v1y"/>
+                <constraint firstItem="2VA-Ob-pzc" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="sDT-gf-1Me"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="120.53571428571428"/>
         </view>

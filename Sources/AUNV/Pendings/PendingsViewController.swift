@@ -33,7 +33,7 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
     @IBOutlet weak var collectionView: UICollectionView!
     
     private func setupCollectionView() {
-        collectionView.register(PendingCell.nib, forCellWithReuseIdentifier: "pending")
+        collectionView.register(NotificationCell.nib, forCellWithReuseIdentifier: "notification")
         collectionView.contentInset.bottom = 10 + 54 + 10
     }
     
@@ -47,7 +47,7 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pending", for: indexPath) as! PendingCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "notification", for: indexPath) as! NotificationCell
         let pending = pendings[indexPath.item]
         cell.fill(by: pending)
         return cell
@@ -72,7 +72,7 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
         if #available(iOS 11.0, *) {
              w -= view.safeAreaInsets.left + view.safeAreaInsets.right
         }
-        return .init(width: w, height: 400)
+        return NotificationCell.size(for: pendings[indexPath.item], width: w)
     }
     
     // MARK: - UIScrollViewDelegate
@@ -91,6 +91,15 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
 
     @IBAction func backTouchUpInside(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func removeTouchUpInside(_ sender: Any) {
+        let alertVC = UIAlertController(title: "Remove all pending notifications?", message: nil, preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Remove All", style: .destructive, handler: { _ in
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        }))
+        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+        present(alertVC, animated: true)
     }
     
     @IBAction func addTouchUpInside(_ sender: Any) {

@@ -108,7 +108,10 @@ class PendingsViewController: UIViewController, UICollectionViewDataSource, UICo
             self.addHandler?()
             self.getPendings()
         }
-        navigationController?.pushViewController(newVC, animated: true)
+        let newNC = UINavigationController(rootViewController: newVC)
+        newNC.navigationBar.isHidden = true
+        newNC.modalPresentationStyle = .fullScreen
+        present(newNC, animated: true)
     }
     
     // MARK: - UIViewController

@@ -12,7 +12,27 @@ import CoreLocation
 class NewPendingViewController: UIViewController {
     var addHandler: (() -> Void)?
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var toastView: ToastView!
+    
+    private let keyboardObserver = KeyboardObserver(enabled: false)
+    
+    private func setup() {
+        scrollView.contentInset.bottom = 25 + 56
+        if #available(iOS 11.1, *) {
+            scrollView.verticalScrollIndicatorInsets.bottom = 25 + 56
+        } else {
+            scrollView.scrollIndicatorInsets.bottom = 25 + 56
+        }
+        
+        keyboardObserver.willShow = { _ in
+            
+        }
+        keyboardObserver.willHide = { _ in
+            
+        }
+    }
     
     @IBAction func addTouchUpInside(_ sender: Any) {
         let content = UNMutableNotificationContent()
@@ -61,10 +81,27 @@ class NewPendingViewController: UIViewController {
         }
     }
     
+    // MARK: - Navigation
+    
+    @IBAction func dismissTouchUpInside(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        keyboardObserver.isEnabled = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        keyboardObserver.isEnabled = false
     }
     
     init() {

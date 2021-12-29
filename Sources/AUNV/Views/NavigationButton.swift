@@ -7,25 +7,7 @@
 
 import UIKit
 
-class NavigationButton: UIControl {
-    
-    // MARK: - UIControl
-    
-    override var isHighlighted: Bool {
-        didSet {
-            if isHighlighted != oldValue {
-                if isHighlighted {
-                    UIViewPropertyAnimator(duration: 0.15, curve: .easeOut, animations: {
-                        self.transform = .init(scaleX: 0.92, y: 0.92)
-                    }).startAnimation()
-                } else {
-                    UIViewPropertyAnimator(duration: 0.3, curve: .easeOut, animations: {
-                        self.transform = .identity
-                    }).startAnimation()
-                }
-            }
-        }
-    }
+class NavigationButton: HighlightingScaledControl {
     
     // MARK: - UIView
     

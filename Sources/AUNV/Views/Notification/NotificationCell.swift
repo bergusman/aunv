@@ -85,25 +85,38 @@ class NotificationCell: HighlightingScaledCell {
             ]))
         }
         
-        func appendAny(_ any: Any, indent: String = "") {
+        func appendAny(_ any: Any, indent: String = "", afterTitle: Bool = false) {
             switch any {
             case let dictionary as [AnyHashable: Any]:
-                appendText(indent + "{\n")
+                if afterTitle {
+                    appendText("{\n")
+                } else {
+                    appendText(indent + "{\n")
+                }
+                
                 for (key, value) in dictionary {
                     appendTitle(indent + "  \(key)")
-                    appendAny(value, indent: indent + "  ")
+                    appendAny(value, indent: indent + "  ", afterTitle: true)
                     appendText("\n")
                 }
                 appendText(indent + "}")
             case let array as [Any]:
-                appendText(indent + "[\n")
+                if afterTitle {
+                    appendText("[\n")
+                } else {
+                    appendText(indent + "[\n")
+                }
+                
                 for value in array {
                     appendAny(value, indent: indent + "  ")
                     appendText("\n")
                 }
                 appendText(indent + "]")
             default:
-                appendText(indent)
+                if !afterTitle {
+                    appendText(indent)
+                }
+                
                 appendValue("\(any)")
             }
         }
